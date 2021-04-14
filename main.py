@@ -6,13 +6,13 @@ coeffs = [float(elem) for elem in fileObject.read().split('\n')]
 
 # Низкочастотный сигнал
 Fs = 1000
-fc1 = 10
-sample = 1000
+fc1 = 90
+sample = 400
 x = np.arange(sample)
 y1 = np.sin(2 * np.pi * fc1 * x / Fs)
 
 # Высокочастотный сигнал
-fc2 = 190
+fc2 = 200
 y2 = np.sin(2 * np.pi * fc2 * x / Fs)
 
 y3 = y1 + y2
