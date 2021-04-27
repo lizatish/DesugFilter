@@ -6,8 +6,8 @@ coeffs = [float(elem) for elem in fileObject.read().split('\n')]
 
 # Низкочастотный сигнал
 Fs = 1000
-fc1 = 90
-sample = 400
+fc1 = 60
+sample = 200
 x = np.arange(sample)
 y1 = np.sin(2 * np.pi * fc1 * x / Fs)
 
@@ -17,14 +17,20 @@ y2 = np.sin(2 * np.pi * fc2 * x / Fs)
 
 y3 = y1 + y2
 
-fig, axs = plt.subplots(4)
-fig.suptitle('Лаба2')
-axs[0].plot(x, y1)
-axs[0].set_title('Низкочастотный сигнал')
-axs[1].plot(x, y2)
-axs[1].set_title('Высокочастотный сигнал')
-axs[2].plot(x, y3)
-axs[2].set_title('Суммарный сигнал')
+fig, axs = plt.subplots(3, 2)
+fig.delaxes(axs[2, 1])
+
+fig.suptitle('Лабораторная работа №2')
+axs[0][0].plot(x, y1)
+axs[0][0].set_title('Низкочастотный сигнал')
+axs[1][0].plot(x, y2)
+axs[1][0].set_title('Высокочастотный сигнал')
+axs[2][0].plot(x, y3)
+axs[2][0].set_title('Суммарный сигнал')
+
+x_h = [i for i in range(len(coeffs))]
+axs[0][1].plot(x_h, coeffs)
+axs[0][1].set_title('Импульсная характеристика ФНЧ')
 
 y4 = []
 for n in range(len(x)):
@@ -37,8 +43,8 @@ for n in range(len(x)):
         sum += coeff * x_val
     y4.append(sum)
 
-axs[3].plot(x, y4)
-axs[3].set_title('Выход фильтра')
+axs[1][1].plot(x, y4)
+axs[1][1].set_title('Выходной сигнал')
 
 fig.tight_layout()
 plt.show()
